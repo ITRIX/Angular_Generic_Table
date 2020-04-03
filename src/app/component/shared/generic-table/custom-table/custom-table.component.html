@@ -1,0 +1,45 @@
+<div class="tabelContainer">
+    <div class="row">
+        
+        <div class="col-md-12">
+            <button type="button" *ngIf="configObject.allowInlineEdit" class="btn btn-outline-primary inline-edit-btn" (click)=allowInlineEdit()>{{allowEdit? 'Disable' : 'Enable'}} inline edit</button>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <ng-container *ngFor="let header of configObject.headerData">
+                            <th *ngIf="header.visible" [style.width]="header.width" [style.text-align]="header.alignment">{{header.name}}
+                                <span 
+                                [ngClass]="{'fa-sort-desc': header.sort==='asc', 'fa-sort-asc': header.sort==='desc', 'fa-sort': header.sort==='enable' }"
+                                class="fa fa-fw sort-icons float-right" (click)="onSort(header)">
+                                </span>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of configObject.data">
+
+                        <ng-container *ngFor="let header of configObject.headerData">
+                            <ng-template [ngIf]="header.type === 'string' && header.visible">
+                                <th><div [attr.contenteditable]="allowEdit" [textContent]="item[header.key]" (blur)="item[header.key]=$event.target.textContent; contentChange(item)"></div></th>
+                            </ng-template>
+
+                            <ng-template [ngIf]="header.type === 'checkbox' && header.visible">
+                                <th><input type="checkbox" [ngModel]="item.status"></th>
+                            </ng-template>
+
+                            <ng-template [ngIf]="header.type === 'currency' && header.visible">
+                                <th>{{ item[header.key] | currency: item.currencyValue}}</th>
+                            </ng-template>
+
+                            <ng-template [ngIf]="header.type === 'date' && header.visible">
+                                <th>{{ item[header.key] | date : 'longDate'}}</th>
+                            </ng-template>
+
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

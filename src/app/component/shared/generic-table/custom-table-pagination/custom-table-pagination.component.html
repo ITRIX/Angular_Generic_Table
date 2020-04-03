@@ -1,0 +1,27 @@
+<div class="pagination-container">
+    <div class="row">
+        <div class="col-md-8 col-sm-2">
+            <form [formGroup]="form">
+                <select class="select-box" (change)="changePageSize()" formControlName="selectedPageSize">
+                    <option *ngFor="let size of defaultPageSizes" [ngValue]="size">{{size}}</option>
+                 </select>
+            </form>
+        </div>
+        <div class="col-md-4 col-sm-10">
+            <nav>
+                <ul class="pagination float-right">
+                  <li class="page-item" [ngClass]="{disabled:currentPage === 1}">
+                    <a class="page-link previous-btn" (click)="setPage(currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{active:currentPage === item}" *ngFor="let item of listOfPages">
+                    <a class="page-link pages-button" (click)="setPage(item)">{{item}}</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{disabled:currentPage === totalPages}">
+                    <a class="page-link nect-button" (click)="setPage(currentPage + 1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
+        </div>
+      </div>
+
+</div>

@@ -1,0 +1,18 @@
+.pagination-container {
+    .select-box {
+        height: 2rem;
+        width: 3rem;
+    }
+    .pagination {
+        a {
+            //color: #007bff;
+            cursor: pointer;
+        }
+        .disabled a {
+            color: grey;
+        }
+        .active {
+            color: #fff;
+        }
+    }
+}

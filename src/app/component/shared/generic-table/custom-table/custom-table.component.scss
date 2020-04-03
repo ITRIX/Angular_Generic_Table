@@ -1,0 +1,19 @@
+.tabelContainer {
+    .inline-edit-btn {
+        position: absolute;
+        top: -55px;
+        right: 15px;
+    }
+    .fa-sort-desc {
+        padding-top: 0.1rem;
+        cursor: pointer;
+    }
+    .fa-sort-asc {
+        padding-top: 0.5rem;
+        cursor: pointer;
+    }
+    .fa-sort {
+        padding-top: 0.4rem;
+        cursor: pointer;
+    }
+}
