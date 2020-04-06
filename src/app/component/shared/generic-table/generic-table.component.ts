@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { GenericTableService } from '../generic-table.service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { GenericTableService } from './generic-table.service';
+import { CustomTableComponent } from './custom-table/custom-table.component';
+import { TranslationService } from './translation/translation.service';
 
 @Component({
   selector: 'app-generic-table',
   templateUrl: './generic-table.component.html',
   styleUrls: ['./generic-table.component.scss'],
-  providers: [GenericTableService]
+  providers: [GenericTableService, TranslationService]
 })
 export class GenericTableComponent implements OnInit {
   @Input() configObject: any;
@@ -16,7 +18,7 @@ export class GenericTableComponent implements OnInit {
   sort: any;
   updatedRecord: any;
   eventsData: Array<string>;
-
+  @ViewChild(CustomTableComponent) customTableComponent: CustomTableComponent;
   constructor(private genericTableService: GenericTableService) { }
 
   ngOnInit(): void {
@@ -33,9 +35,10 @@ export class GenericTableComponent implements OnInit {
         payload = JSON.stringify(data.value);
       }
       const query = this.generateQuery();
-      this.genericTableService.getData(data.event, query, payload).subscribe(data => {
+      this.genericTableService.getData(data.event, query, payload).subscribe(result => {
         // data variable assign to this.configObject.data;
         // this.eventsData is only for displaying for events
+        setTimeout(() => { this.customTableComponent.loadComponent(); });
         this.eventsData = this.genericTableService.eventsData;
       }, error => {
         console.log('Data Load Failed');
@@ -51,8 +54,8 @@ export class GenericTableComponent implements OnInit {
   generateQuery(): string {
     const query = [];
     query.push(`${this.configObject.API_URL}/api/endpoint&pageSize=${this.pageSize}`);
-    if (this.searchValue && this.searchValue !== '') { query.push(`&cursor=${this.cursor}&search=${this.searchValue}`) };
-    if (this.sortValue && this.sortValue !== '') { query.push(`&sort=${this.sortValue}`) };
+    if (this.searchValue && this.searchValue !== '') { query.push(`&cursor=${this.cursor}&search=${this.searchValue}`); }
+    if (this.sortValue && this.sortValue !== '') { query.push(`&sort=${this.sortValue}`); }
     return query.join('');
   }
 

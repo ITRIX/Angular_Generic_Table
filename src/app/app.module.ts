@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { SharedModule } from './component/shared/shared.module';
+import { GenericTableModule } from './component/shared/generic-table/generic-table.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    GenericTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

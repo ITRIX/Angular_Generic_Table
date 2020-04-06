@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { GenericTableService } from '../../generic-table.service';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ViewChildren, QueryList } from '@angular/core';
+import { GenericTableService } from '../generic-table.service';
+import { TranslationService } from '../translation/translation.service';
+import { DynamicLabelComponent } from '../dynamic-label/dynamic-label.component';
+import { LabelDirective } from '../directive/label.directive';
 
 @Component({
   selector: 'app-custom-table',
@@ -10,10 +13,31 @@ export class CustomTableComponent implements OnInit {
   @Input() configObject: any;
   sortFields = {};
   allowEdit: boolean;
-  constructor(private genericTableService: GenericTableService) { }
+  currentAdIndex = -1;
+  @ViewChildren(LabelDirective) labelHost: QueryList<LabelDirective>;
+  constructor(private genericTableService: GenericTableService,
+              public translationService: TranslationService,
+              private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
+    setTimeout(() => { this.loadComponent(); });
     this.allowEdit = false;
+  }
+
+  /**
+   * loadComponent
+   *
+   * @description - it adds dynamic component at runtime
+   */
+  loadComponent() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicLabelComponent);
+    // tslint:disable-next-line: no-string-literal
+    this.labelHost['_results'].forEach(element => {
+      const viewContainerRef = element.viewContainerRef;
+      viewContainerRef.clear();
+      const componentRef = viewContainerRef.createComponent(componentFactory);
+      componentRef.instance.data = element.data['custom-component'].data;
+    });
   }
 
   /**
@@ -39,15 +63,15 @@ export class CustomTableComponent implements OnInit {
    *
    * @description - invoke api to get result
    */
-  sendSortEvent(field, method) {
-    if(method === 'none') {
+  sendSortEvent(field: string, method: any): void {
+    if (method === 'none') {
       delete this.sortFields[field];
     } else {
       this.sortFields[field] = method;
     }
     const sortList = [];
-    Object.keys(this.sortFields).map((key)=>{ 
-      sortList.push({field: key, method: this.sortFields[key]})
+    Object.keys(this.sortFields).map((key) => {
+      sortList.push({field: key, method: this.sortFields[key]});
     });
     this.genericTableService.tabelEvents.next({event: 'SORT', value: sortList});
   }
@@ -66,8 +90,16 @@ export class CustomTableComponent implements OnInit {
    *
    * @description - invoke api and send updated record and get updated result
    */
-  contentChange(item){
+  contentChange(item: any): void {
     this.genericTableService.tabelEvents.next({event: 'EDIT', value: item});
   }
 
+  /**
+   * checkValue
+   *
+   * @description - triggers when click on checkbox
+   */
+  checkValue(item: any, val): void {
+    item.status = val.target.checked;
+  }
 }

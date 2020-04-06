@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { GenericTableService } from '../../generic-table.service';
+import { GenericTableService } from '../generic-table.service';
 
 @Component({
   selector: 'app-custom-table-search',

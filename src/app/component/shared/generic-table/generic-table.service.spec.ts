@@ -6,7 +6,9 @@ describe('GenericTableService', () => {
   let service: GenericTableService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [GenericTableService]
+    });
     service = TestBed.inject(GenericTableService);
   });
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { GenericTableService } from '../../generic-table.service';
+import { GenericTableService } from '../generic-table.service';
 
 @Component({
   selector: 'app-custom-table-pagination',
@@ -26,7 +26,7 @@ export class CustomTablePaginationComponent implements OnInit {
     this.currentPage = 1;
     this.totalItems = this.tableConfig.data?.length;
     this.allItems = JSON.parse(JSON.stringify(this.tableConfig.data));
-    this.pageSize = this.tableConfig.paginationConfig.curentPageSize;
+    this.pageSize = this.tableConfig.paginationConfig.defaultPageSize;
     this.form = new FormGroup({
       selectedPageSize: new FormControl(this.pageSize, []),
     });

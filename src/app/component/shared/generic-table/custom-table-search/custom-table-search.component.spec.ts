@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomTableSearchComponent } from './custom-table-search.component';
+import { GenericTableService } from '../generic-table.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('CustomTabelSearchComponent', () => {
   let component: CustomTableSearchComponent;
@@ -8,7 +10,9 @@ describe('CustomTabelSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomTableSearchComponent ]
+      imports: [ReactiveFormsModule],
+      declarations: [ CustomTableSearchComponent ],
+      providers: [GenericTableService]
     })
     .compileComponents();
   }));

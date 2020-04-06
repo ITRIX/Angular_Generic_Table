@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomTableConfigService } from 'src/app/services/custom-table-config.service';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,7 @@ import { CustomTableConfigService } from 'src/app/services/custom-table-config.s
 export class DashboardComponent implements OnInit {
   tableConfig: any;
   paginationConfig: any;
-  constructor(private customTableConfigService: CustomTableConfigService) { }
+  constructor(private customTableConfigService: CustomTableConfigService, private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.tableConfig = JSON.parse(JSON.stringify(this.customTableConfigService.tabelConfigObject));
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
     this.tableConfig.allowInlineEdit = true;
     this.tableConfig.headerData = [{
       key: 'id',
-      name: 'ID',
+      name: 'dashboard.table.id',
       sort: 'enable',
       columnOrder: 0,
       type: 'string',
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       key: 'name',
-      name: 'Name',
+      name: 'dashboard.table.name',
       sort: 'enable',
       columnOrder: 1,
       type: 'string',
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       key: 'status',
-      name: 'Married / Unmarried',
+      name: 'dashboard.table.status',
       sort: 'enable',
       columnOrder: 2,
       type: 'checkbox',
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       key: 'salary',
-      name: 'Salary',
+      name: 'dashboard.table.salary',
       sort: 'enable',
       columnOrder: 3,
       type: 'currency',
@@ -57,88 +58,26 @@ export class DashboardComponent implements OnInit {
     },
     {
       key: 'dob',
-      name: 'DOB',
+      name: 'dashboard.table.dob',
       sort: 'desc',
       columnOrder: 4,
       type: 'date',
       visible: true,
       width: 'auto',
       alignment: 'left'
+    },
+    {
+      key: 'custom-component',
+      name: 'dashboard.table.skills',
+      sort: 'none',
+      columnOrder: 5,
+      type: 'custom-component',
+      visible: true,
+      width: 'auto',
+      alignment: 'left'
     }];
 
-    this.tableConfig.data = [{
-      id: 1,
-      name: 'Prakash',
-      status: false,
-      salary: 1000,
-      currencyValue: 'EUR',
-      dob: '674604000000'
-    },
-    {
-      id: 2,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 3,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 4,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 5,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 6,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 7,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 8,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    },
-    {
-      id: 9,
-      name: 'Prakash',
-      status: true,
-      salary: 1000,
-      dob: '674604000000',
-      currencyValue: 'INR'
-    }
-    ];
+    this.tableConfig.data = this.dashboardService.getPersonDetails();
 
     this.tableConfig.headerData.sort((a, b) => {
       return a.columnOrder - b.columnOrder;

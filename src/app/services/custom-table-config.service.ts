@@ -10,8 +10,7 @@ export class CustomTableConfigService {
     data: [],
     paginationConfig: {
       defaultPageSize: 25,
-      defaultPageSizes: [5, 10, 25, 50, 100],
-      curentPageSize: 25
+      defaultPageSizes: [5, 10, 25, 50, 100]
     },
     searchConfig: {
       allowSearch: true,
