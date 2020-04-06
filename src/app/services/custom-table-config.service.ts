@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Type } from '@angular/core';
+import { DynamicLabelComponent } from '../component/dynamic-component/dynamic-label/dynamic-label.component';
+import { DynamicListComponent } from '../component/dynamic-component/dynamic-list/dynamic-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +22,16 @@ export class CustomTableConfigService {
     allowInlineEdit: false
   };
   constructor() { }
+
+  getDynamicComponent() {
+    return [
+      new AdItem(DynamicLabelComponent),
+      new AdItem(DynamicListComponent),
+    ];
+  }
 }
+
+export class AdItem {
+  constructor(public component: Type<any>) {}
+}
+
