@@ -1,0 +1,5 @@
+<app-custom-table-search *ngIf="configObject.searchConfig.allowSearch"></app-custom-table-search>
+<app-custom-table [configObject]="configObject"></app-custom-table>
+<app-custom-table-pagination [tableConfig]="configObject"></app-custom-table-pagination>
+<!-- Just for showing events log we can remove it later-->
+<div *ngFor="let item of eventsData">{{item}}</div>

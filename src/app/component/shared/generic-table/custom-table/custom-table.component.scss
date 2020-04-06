@@ -1,0 +1,33 @@
+@import "../generic-table.component.scss";
+
+.tabelContainer {
+    .container-utility {
+        .languageDropdown {
+            height: 2.3rem;
+            width: 5rem;
+            margin-right: 1rem;
+        }
+        position: absolute;
+        top: -55px;
+        right: 15px;
+    }
+    .fa-sort-desc {
+        padding-top: 0.1rem;
+        cursor: pointer;
+    }
+    .fa-sort-asc {
+        padding-top: 0.5rem;
+        cursor: pointer;
+    }
+    .fa-sort {
+        padding-top: 0.4rem;
+        cursor: pointer;
+    }
+    .generic-tabel-header {
+        @include table-header-cls;
+    }
+    table {
+        // You can pass small , medium, large
+        @include table-font(large);
+    }
+}

@@ -1,0 +1,11 @@
+$header-color: #303f9f;
+
+$font-sizes: ("small": 8px, "medium": 12px, "large": 16px);
+
+@mixin table-header-cls {
+    background: linear-gradient(40deg,#45cafc, $header-color);
+}
+
+@mixin  table-font($size) {
+    font-size: map-get($font-sizes, $size );
+}
