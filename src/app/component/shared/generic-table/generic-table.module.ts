@@ -8,7 +8,7 @@ import { CustomTableFilterComponent } from '../generic-table/custom-Table-filter
 import { ReactiveFormsModule } from '@angular/forms';
 import { GenericTableComponent } from '../generic-table/generic-table.component';
 import { TranslatePipe } from './translation/translate.pipe';
-import { DynamicLabelComponent } from './dynamic-label/dynamic-label.component';
+import { DynamicLabelComponent } from '../../dynamic-component/dynamic-label/dynamic-label.component';
 import { LabelDirective } from './directive/label.directive';
 
 @NgModule({

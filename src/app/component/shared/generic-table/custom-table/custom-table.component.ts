@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, ViewChildren, QueryList } from '@angular/core';
 import { GenericTableService } from '../generic-table.service';
 import { TranslationService } from '../translation/translation.service';
-import { DynamicLabelComponent } from '../dynamic-label/dynamic-label.component';
 import { LabelDirective } from '../directive/label.directive';
+import { CustomTableConfigService, AdItem } from 'src/app/services/custom-table-config.service';
 
 @Component({
   selector: 'app-custom-table',
@@ -17,7 +17,8 @@ export class CustomTableComponent implements OnInit {
   @ViewChildren(LabelDirective) labelHost: QueryList<LabelDirective>;
   constructor(private genericTableService: GenericTableService,
               public translationService: TranslationService,
-              private componentFactoryResolver: ComponentFactoryResolver) { }
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private customTableConfigService: CustomTableConfigService) { }
 
   ngOnInit(): void {
     setTimeout(() => { this.loadComponent(); });
@@ -30,9 +31,10 @@ export class CustomTableComponent implements OnInit {
    * @description - it adds dynamic component at runtime
    */
   loadComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicLabelComponent);
     // tslint:disable-next-line: no-string-literal
     this.labelHost['_results'].forEach(element => {
+      const adItem = this.customTableConfigService.getDynamicComponent()[element.data['custom-component']['component-index']];
+      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(adItem.component);
       const viewContainerRef = element.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent(componentFactory);

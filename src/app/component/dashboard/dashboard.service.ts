@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DynamicLabelComponent } from '../shared/generic-table/dynamic-label/dynamic-label.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,7 @@ export class DashboardService {
       currencyValue: 'EUR',
       dob: '674604000000',
       'custom-component': {
+        'component-index': 1,
         data: ['React', 'HTML5']
       }
     },
@@ -28,6 +28,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 1,
         data: ['PHP', 'VB8']
       }
     },
@@ -39,6 +40,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 0,
         data: ['Angular', 'CSS']
       }
     },
@@ -50,6 +52,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 1,
         data: ['Bootstrap', 'SCSS']
       }
     },
@@ -61,6 +64,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 0,
         data: ['Typescript 3', 'HTML']
       }
     },
@@ -72,6 +76,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 0,
         data: ['JAVA', 'SCSS']
       }
     },
@@ -83,6 +88,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 0,
         data: ['Vue.js', 'PHP']
       }
     },
@@ -94,6 +100,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 0,
         data: ['HTML5', 'JAVA']
       }
     },
@@ -105,6 +112,7 @@ export class DashboardService {
       dob: '674604000000',
       currencyValue: 'INR',
       'custom-component': {
+        'component-index': 1,
         data: ['JSP', 'CSS3']
       }
     }];
